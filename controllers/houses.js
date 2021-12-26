@@ -1,3 +1,6 @@
+const House = require("../models/houses");
+const { StatusCodes } = require("http-status-codes");
+
 const getAllHouses = async (req, res) => {
   res.send("Get All Houses");
 };
