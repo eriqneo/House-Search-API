@@ -16,6 +16,10 @@ const HouseSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please Provide Where House is Located"],
     },
+    price: {
+      type: Number,
+      required: [true, "Please Provide the House Price"],
+    },
     status: {
       type: String,
       enum: ["Rental", "For Sale", "For Hire"],

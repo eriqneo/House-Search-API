@@ -5,6 +5,7 @@ const app = express();
 
 //connect to Database
 const ConnectDB = require("./db/connectDB");
+const authenticateUser = require("./middleware/authentication");
 
 const houseRouter = require("./routes/houses");
 const authRouter = require("./routes/auth");
@@ -14,8 +15,8 @@ const notFoundMiddleware = require("./middleware/not-found");
 
 app.use(express.json());
 
-app.use("/api/v1/houses", houseRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/houses", authenticateUser, houseRouter);
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
