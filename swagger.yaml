@@ -1,0 +1,248 @@
+openapi: 3.0.0
+info:
+  title: HouseSearchAPI
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://house-search-2022.herokuapp.com/api/v1/
+    variables: {}
+paths:
+  /houses:
+    get:
+      tags:
+        - Houses
+      summary: Get All House
+      operationId: GetAllHouse
+      parameters:
+        - name: isOwned
+          in: query
+          description: ""
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+            example: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Houses
+      summary: Post New House
+      operationId: PostNewHouse
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostNewHouseRequest"
+            example:
+              houseSize: 3 Bedroom
+              houseType: unfurnished
+              areaIn: Kanyamedha
+              price: 23000
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /houses/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The house ID
+    get:
+      tags:
+        - Houses
+      summary: Get A House
+      operationId: GetAHouse
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+
+    patch:
+      tags:
+        - Houses
+      summary: Update A House
+      operationId: UpdateAHouse
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAHouseRequest"
+            example:
+              houseSize: 4 Bedroom
+              houseType: Unfurnished
+              areaIn: Molem
+              price: 30000
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+
+    delete:
+      tags:
+        - Houses
+      summary: Delete A House
+      operationId: DeleteAHouse
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+            example:
+              name: Edwina
+              email: edwina@gmail.com
+              password: secret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+            example:
+              email: nessa3@hotmail.com
+              password: secret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    PostNewHouseRequest:
+      title: PostNewHouseRequest
+      required:
+        - houseSize
+        - houseType
+        - areaIn
+        - price
+      type: object
+      properties:
+        houseSize:
+          type: string
+        houseType:
+          type: string
+        areaIn:
+          type: string
+        price:
+          type: integer
+          format: int32
+      example:
+        houseSize: 3 Bedroom
+        houseType: unfurnished
+        areaIn: Kanyamedha
+        price: 23000
+    UpdateAHouseRequest:
+      title: UpdateAHouseRequest
+      required:
+        - houseSize
+        - houseType
+        - areaIn
+        - price
+      type: object
+      properties:
+        houseSize:
+          type: string
+        houseType:
+          type: string
+        areaIn:
+          type: string
+        price:
+          type: integer
+          format: int32
+      example:
+        houseSize: 4 Bedroom
+        houseType: Unfurnished
+        areaIn: Molem
+        price: 30000
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Edwina
+        email: edwina@gmail.com
+        password: secret
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: nessa3@hotmail.com
+        password: secret
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Misc
+    description: ""
+  - name: Houses
+    description: ""
+  - name: Auth
+    description: ""
